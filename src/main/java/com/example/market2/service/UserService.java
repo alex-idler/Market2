@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -46,5 +47,9 @@ public class UserService {
     public List<User> findPassiveUsers(int value) {
         Page<User> page = userRepository.findPassiveUsers(PageRequest.of(0, value));
         return page.get().toList();
+    }
+
+    public List<UserRepository.UserStatJSON> usersByDate(Date dateFrom, Date dateTo) {
+        return userRepository.usersByDate(dateFrom, dateTo);
     }
 }

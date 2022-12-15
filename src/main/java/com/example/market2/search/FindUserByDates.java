@@ -5,11 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class FindUsersByMinCountOfProduct {
-    private String productName;
-    private Long minPurchases;
+@NoArgsConstructor
+public class FindUserByDates {
+    private Date dateFrom;
+    private Date dateTo;
 }

@@ -3,6 +3,8 @@ package com.example.market2.controller;
 import com.example.market2.entity.Product;
 import com.example.market2.entity.Purchase;
 import com.example.market2.entity.User;
+import com.example.market2.repository.UserRepository;
+import com.example.market2.search.FindUserByDates;
 import com.example.market2.search.FindUsersByMinCountOfProduct;
 import com.example.market2.search.FindUsersByMinMaxSum;
 import com.example.market2.service.ProductService;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/buyer")
 public class MarketController {
 
     private final UserService userService;
@@ -29,7 +31,7 @@ public class MarketController {
         this.purchaseService = purchaseService;
     }
 
-    @PostMapping("findByLastname")
+    @PostMapping("findByName")
     public ResponseEntity<List<User>> findByLastname(@RequestBody String lastname) {
         return ResponseEntity.ok(userService.findByLastname(lastname));
     }
@@ -39,35 +41,26 @@ public class MarketController {
         return ResponseEntity.ok(userService.findAll());
     }
 
-    @PostMapping("findUsersByMinCountOfProduct")
+    @PostMapping("findByProduct")
     public ResponseEntity<List<User>> findUsersByMinCountOfProduct(@RequestBody FindUsersByMinCountOfProduct searchFields) {
         return ResponseEntity.ok(userService.findUsersByMinCountOfProduct(searchFields.getProductName(),
-                                                                          searchFields.getMinCount()));
+                                                                          searchFields.getMinPurchases()));
     }
 
-    @PostMapping("findUsersByMinMaxSum")
+    @PostMapping("findMinMax")
     public ResponseEntity<List<User>> findUsersByMinMaxSum(@RequestBody FindUsersByMinMaxSum searchFields) {
         return ResponseEntity.ok(userService.findUsersBySumPrice(searchFields.getMinSum(),
                                                                  searchFields.getMaxSum()));
     }
 
-    @PostMapping("findPassiveUsers")
+    @PostMapping("findBad")
     public ResponseEntity<List<User>> findPassiveUsers(@RequestBody int value) {
         return ResponseEntity.ok(userService.findPassiveUsers(value));
     }
 
-    @GetMapping("user/{id}")
-    public User getUserById(@PathVariable("id") int id) {
-        return userService.getUserById(id);
+    @PostMapping("/buyerStat")
+    public ResponseEntity<List<UserRepository.UserStatJSON>> usersByDate(@RequestBody FindUserByDates userByDates) {
+        return ResponseEntity.ok(userService.usersByDate(userByDates.getDateFrom(), userByDates.getDateTo()));
     }
 
-    @GetMapping("products")
-    public List<Product> findAllProducts() {
-        return productService.findAll();
-    }
-
-    @GetMapping("purchases")
-    public List<Purchase> findAllPurchases() {
-        return purchaseService.findAll();
-    }
 }
