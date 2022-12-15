@@ -34,8 +34,9 @@ public class UserService {
         return userRepository.findByLastnameContainsIgnoreCase(lastname);
     }
 
-    public List<User> findUsersByCountOfProducts(String title, Long value) {
-        return userRepository.findUsersByCountOfProducts("%" + title + "%", value); // пришлось тут дописывать проценты для регулярки, в запросе не получалось
+    public List<User> findUsersByMinCountOfProduct(String productName, Long minCount) {
+        // в return пришлось дописывать проценты для регулярки в наименование, в запросе не получалось
+        return userRepository.findUsersByMinCountOfProduct("%" + productName + "%", minCount);
     }
 
     public List<User> findUsersBySumPrice(Double minSum, Double maxSum) {

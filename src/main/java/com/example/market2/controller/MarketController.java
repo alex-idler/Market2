@@ -3,6 +3,7 @@ package com.example.market2.controller;
 import com.example.market2.entity.Product;
 import com.example.market2.entity.Purchase;
 import com.example.market2.entity.User;
+import com.example.market2.search.FindUsersByMinCountOfProduct;
 import com.example.market2.service.ProductService;
 import com.example.market2.service.PurchaseService;
 import com.example.market2.service.UserService;
@@ -42,15 +43,10 @@ public class MarketController {
         return userService.getUserById(id);
     }
 
-//    @GetMapping("user")
-//    public List<User> findByLastname(@RequestParam("lastname") String lastname) {
-//        return userService.findByLastname(lastname);
-//    }
-
-    @GetMapping("count")
-    public List<User> findUsersByCountOfProducts(@RequestParam("product") String title,
-                                                 @RequestParam("value")   Long   value) {
-        return userService.findUsersByCountOfProducts(title, value);
+    @PostMapping("findUsersByMinCountOfProduct")
+    public ResponseEntity<List<User>> findUsersByMinCountOfProduct(@RequestBody FindUsersByMinCountOfProduct searchFields) {
+        return ResponseEntity.ok(userService.findUsersByMinCountOfProduct(searchFields.getProductName(),
+                                                                          searchFields.getMinCount()));
     }
 
     @GetMapping("sum")
