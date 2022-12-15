@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FindUsersByMinCountOfProduct {
-    private String productName;
-    private Long minCount;
+public class FindUsersByMinMaxSum {
+    private Double minSum;
+    private Double maxSum;
 }

@@ -4,6 +4,7 @@ import com.example.market2.entity.Product;
 import com.example.market2.entity.Purchase;
 import com.example.market2.entity.User;
 import com.example.market2.search.FindUsersByMinCountOfProduct;
+import com.example.market2.search.FindUsersByMinMaxSum;
 import com.example.market2.service.ProductService;
 import com.example.market2.service.PurchaseService;
 import com.example.market2.service.UserService;
@@ -38,26 +39,26 @@ public class MarketController {
         return ResponseEntity.ok(userService.findAll());
     }
 
-    @GetMapping("user/{id}")
-    public User getUserById(@PathVariable("id") int id) {
-        return userService.getUserById(id);
-    }
-
     @PostMapping("findUsersByMinCountOfProduct")
     public ResponseEntity<List<User>> findUsersByMinCountOfProduct(@RequestBody FindUsersByMinCountOfProduct searchFields) {
         return ResponseEntity.ok(userService.findUsersByMinCountOfProduct(searchFields.getProductName(),
                                                                           searchFields.getMinCount()));
     }
 
-    @GetMapping("sum")
-    public List<User> findUsersBySumPrice(@RequestParam("min") Double minSum,
-                                          @RequestParam("max") Double maxSum) {
-        return userService.findUsersBySumPrice(minSum, maxSum);
+    @PostMapping("findUsersByMinMaxSum")
+    public ResponseEntity<List<User>> findUsersByMinMaxSum(@RequestBody FindUsersByMinMaxSum searchFields) {
+        return ResponseEntity.ok(userService.findUsersBySumPrice(searchFields.getMinSum(),
+                                                                 searchFields.getMaxSum()));
     }
 
     @GetMapping("passive")
     public List<User> findPassiveUsers(@RequestParam("value") int value) {
         return userService.findPassiveUsers(value);
+    }
+
+    @GetMapping("user/{id}")
+    public User getUserById(@PathVariable("id") int id) {
+        return userService.getUserById(id);
     }
 
     @GetMapping("products")
