@@ -51,9 +51,9 @@ public class MarketController {
                                                                  searchFields.getMaxSum()));
     }
 
-    @GetMapping("passive")
-    public List<User> findPassiveUsers(@RequestParam("value") int value) {
-        return userService.findPassiveUsers(value);
+    @PostMapping("findPassiveUsers")
+    public ResponseEntity<List<User>> findPassiveUsers(@RequestBody int value) {
+        return ResponseEntity.ok(userService.findPassiveUsers(value));
     }
 
     @GetMapping("user/{id}")
