@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    List<User> findByLastnameIgnoreCase(String lastname);
+    List<User> findByLastnameContainsIgnoreCase(String lastname);
 
     @Query( "select new com.example.market2.entity.User(u.id, u.firstname, u.lastname) " +
             "from User u join Purchase pur on u = pur.user join Product pr on pr = pur.product " +

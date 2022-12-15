@@ -7,6 +7,7 @@ import com.example.market2.service.ProductService;
 import com.example.market2.service.PurchaseService;
 import com.example.market2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +27,11 @@ public class MarketController {
         this.purchaseService = purchaseService;
     }
 
+    @PostMapping("findByLastname")
+    public ResponseEntity<List<User>> findByLastname(@RequestBody String lastname) {
+        return ResponseEntity.ok(userService.findByLastname(lastname));
+    }
+
     @GetMapping("users")
     public List<User> findAllUsers() {
         return userService.findAll();
@@ -36,10 +42,10 @@ public class MarketController {
         return userService.getUserById(id);
     }
 
-    @GetMapping("user")
-    public List<User> findByLastname(@RequestParam("lastname") String lastname) {
-        return userService.findByLastname(lastname);
-    }
+//    @GetMapping("user")
+//    public List<User> findByLastname(@RequestParam("lastname") String lastname) {
+//        return userService.findByLastname(lastname);
+//    }
 
     @GetMapping("count")
     public List<User> findUsersByCountOfProducts(@RequestParam("product") String title,

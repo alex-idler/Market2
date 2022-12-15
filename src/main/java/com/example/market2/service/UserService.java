@@ -16,6 +16,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -30,7 +31,7 @@ public class UserService {
     }
 
     public List<User> findByLastname(String lastname) {
-        return userRepository.findByLastnameIgnoreCase(lastname);
+        return userRepository.findByLastnameContainsIgnoreCase(lastname);
     }
 
     public List<User> findUsersByCountOfProducts(String title, Long value) {
