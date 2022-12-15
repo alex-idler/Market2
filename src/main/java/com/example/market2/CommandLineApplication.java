@@ -1,15 +1,14 @@
 //package com.example.market2;
 //
-//
+//import com.example.market2.service.FileService;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.CommandLineRunner;
 //import org.springframework.boot.SpringApplication;
 //import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import org.springframework.context.ApplicationContext;
-//import ru.javabegin.zadachi.shop.service.FileService;
 //
-////@SpringBootApplication
-//public class CLIApplication implements CommandLineRunner {
+//@SpringBootApplication
+//public class CommandLineApplication implements CommandLineRunner {
 //
 //	private static ApplicationContext context;
 //
@@ -17,7 +16,7 @@
 //	public void context(ApplicationContext context) { this.context = context; }
 //
 //	public static void main(String[] args) {
-//		SpringApplication.run(CLIApplication.class, args);
+//		SpringApplication.run(CommandLineApplication.class, args);
 //	}
 //
 //	@Override

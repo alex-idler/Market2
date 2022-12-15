@@ -1,14 +1,10 @@
 package com.example.market2.controller;
 
-import com.example.market2.entity.Product;
-import com.example.market2.entity.Purchase;
 import com.example.market2.entity.User;
 import com.example.market2.repository.UserRepository;
 import com.example.market2.search.FindUserByDates;
 import com.example.market2.search.FindUsersByMinCountOfProduct;
 import com.example.market2.search.FindUsersByMinMaxSum;
-import com.example.market2.service.ProductService;
-import com.example.market2.service.PurchaseService;
 import com.example.market2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +17,10 @@ import java.util.List;
 public class MarketController {
 
     private final UserService userService;
-    private final ProductService productService;
-    private final PurchaseService purchaseService;
 
     @Autowired
-    public MarketController(UserService userService, ProductService productService, PurchaseService purchaseService) {
+    public MarketController(UserService userService) {
         this.userService = userService;
-        this.productService = productService;
-        this.purchaseService = purchaseService;
     }
 
     @PostMapping("findByName")
