@@ -32,9 +32,9 @@ public class MarketController {
         return ResponseEntity.ok(userService.findByLastname(lastname));
     }
 
-    @GetMapping("users")
-    public List<User> findAllUsers() {
-        return userService.findAll();
+    @PostMapping("getAllUsers")
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(userService.findAll());
     }
 
     @GetMapping("user/{id}")
